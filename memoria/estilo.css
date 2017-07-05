@@ -1,0 +1,10 @@
+#carta{
+    animation: 4s ease 0s normal forwards 1 fadeout;
+}
+
+@keyframes fadeout{
+    0% { opacity:1; }
+    40% { opacity:1; }
+    80% { opacity:0.5; }
+    100% { opacity:0; }
+}

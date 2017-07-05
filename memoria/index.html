@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Memoria</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <style>
+        .card-deck {
+            margin-bottom: 20px;
+        }
+
+        .card-block {
+            font-size: 50px;
+            text-align: center;
+            min-height: 130px;
+            cursor: pointer;
+        }
+
+        .col h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Juego de Memoria</h1>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐶"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐱"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐭"></div>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐹"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐰"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐻"></div>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐶"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐱"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐭"></div>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐹"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐰"></div>
+            </div>
+            <div class="card">
+                <div class="card-block bg-primary" data-emoji="🐻"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+
+        $(document).ready(function () {
+            var turnos = 0;
+            var turno1 = "";
+            var turno2 = "";
+
+            var emojis = ["🐱", "🐶", "🐭", "🐹", "🐰", "🐻", "🐶", "🐱", "🐭", "🐹", "🐰", "🐻"];
+            emojis = shuffleArray(emojis);
+
+            $('.card-block').addClass("carta");
+
+            var cartas = $('.carta');
+
+            for (i = 0; i < emojis.length; i++) {
+                $(cartas[i]).data("emoji", emojis[i]);
+            }
+
+            $('.card-block').on('click', function () {
+                var emoji = $(this).data("emoji");
+
+                if (turnos == 2) {
+                    $('.carta').html("");
+                    $('.carta').addClass("bg-primary");
+                    turnos = 0;
+                    turno1 = "";
+                    turno2 = "";
+                    return;
+                } else {
+                    turno1 = turno1 == "" ? this : turno1;
+
+                    if (turnos == 1)
+                        turno2 = turno2 == "" ? this : turno2;
+
+                    if ($(turno1).data("emoji") == $(turno2).data("emoji")) {
+                        $(turno1).removeClass("carta");
+                        $(turno2).removeClass("carta");
+                    }
+
+                    $(this).html(emoji);
+                    $(this).removeClass("bg-primary");
+                    turnos++;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

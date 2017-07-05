@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Palíndromos</title>
+
+  <script type="text/javascript">
+    //("La ruta nos aporto otro paso natural"));
+    var cadena = prompt("Escribe un palindromo");
+
+    var resultado = "La cadena \"" + cadena + "\" ";
+
+    // Pasar a minusculas la cadena
+    var cadenaOriginal = cadena.toLowerCase();
+
+    // Convertir la cadena en un array
+    var letrasEspacios = cadenaOriginal.split("");
+
+    // Eliminar los espacios en blanco (este paso es demasiado largo ya que no se utiliza la funcion "replace")
+    var cadenaSinEspacios = "";
+    for (i in letrasEspacios) {
+      if (letrasEspacios[i] != " ") {
+        cadenaSinEspacios += letrasEspacios[i];
+      }
+    }
+    
+    // Convertir la cadena sin espacios en array
+    var letras = cadenaSinEspacios.split("");
+    // Convertir la cadena sin espacios en array invertido
+    var letrasReves = cadenaSinEspacios.split("");
+    letrasReves.reverse();
+
+    // Comparamos letra por letra nuestros arrays
+    var iguales = true;
+
+    for (i in letras) {
+      if (letras[i] != letrasReves[i]) {
+        // Alguna letra es distinta, por lo que ya no es un palindromo
+        iguales = false;
+      }
+    }
+
+    if (iguales) {
+      resultado += " es un palíndromo";
+    }
+    else {
+      resultado += " no es un palíndromo";
+    }
+
+    alert(resultado);
+
+  </script>
+</head>
+
+<body>
+  <h1>
+    Completá el código fuente. Para volver a probar, usá F5.
+  </h1>
+</body>
+
+</html>
